@@ -12,12 +12,13 @@
         (mapcar(lambda (item)(concat "-I" item))
                (split-string
                 "
-   /usr/lib/gcc/x86_64-redhat-linux/4.8.2/../../../../include/c++/4.8.2
-  /usr/lib/gcc/x86_64-redhat-linux/4.8.2/../../../../include/c++/4.8.2/x86_64-redhat-linux
-  /usr/lib/gcc/x86_64-redhat-linux/4.8.2/../../../../include/c++/4.8.2/backward
-  /usr/lib/gcc/x86_64-redhat-linux/4.8.2/include
-  /usr/local/include
-  /usr/include
+ /usr/include/c++/4.8.2
+ /usr/include/c++/4.8.2/i486-linux-gnu
+ /usr/include/c++/4.8.2/backward
+ /usr/local/include
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.2/include
+ /usr/include/linux
+ /usr/include
 ")))
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
@@ -32,5 +33,19 @@
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
 ;; ac-source-gtags
 (my-ac-config)
+
+(global-set-key [(f11)] 'loop-alpha)
+(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
+
+(defun loop-alpha ()
+  (interactive)
+  (let ((h (car alpha-list)))                ;; head value will set to
+    ((lambda (a ab)
+       (set-frame-parameter (selected-frame) 'alpha (list a ab))
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
+       ) (car h) (car (cdr h)))
+    (setq alpha-list (cdr (append alpha-list (list h))))
+    )
+  )
 
 (provide 'init-local)
