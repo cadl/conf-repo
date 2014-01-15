@@ -12,13 +12,10 @@
         (mapcar(lambda (item)(concat "-I" item))
                (split-string
                 "
- /usr/include/c++/4.8.2
- /usr/include/c++/4.8.2/i486-linux-gnu
- /usr/include/c++/4.8.2/backward
- /usr/local/include
- /usr/lib/gcc/x86_64-redhat-linux/4.8.2/include
- /usr/include/linux
  /usr/include
+ /usr/local/include
+ /usr/include/linux
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.2/include
 ")))
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
