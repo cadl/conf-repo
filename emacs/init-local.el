@@ -1,5 +1,4 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-clang")
-
 (require 'auto-complete-clang)
 (setq ac-clang-auto-save t)
 (setq ac-auto-start t)
@@ -26,7 +25,7 @@
   (global-auto-complete-mode t))
 (defun my-ac-cc-mode-setup ()
   (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources))
-  (c-set-style "cc-mode"))
+  (c-set-style "stroustrup"))
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
 ;; ac-source-gtags
 (my-ac-config)
