@@ -1,0 +1,4 @@
+(require-package 'django-mode)
+(yas/load-directory "path-to/django-mode/snippets")
+(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mode))
+(provide 'init-django)

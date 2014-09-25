@@ -1,0 +1,47 @@
+(add-to-list 'load-path "~/.emacs.d/elpa/virtualenvwrapper-20140705.1926")
+(add-to-list 'load-path "~/.emacs.d/elpa/web-mode-20140812.1250")
+
+
+;; (ac-set-trigger-key "TAB")
+;; (define-key ac-mode-map  [(control tab)] 'auto-complete)
+
+(global-set-key [(f11)] 'loop-alpha)
+(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
+
+(defun loop-alpha ()
+  (interactive)
+  (let ((h (car alpha-list)))                ;; head value will set to
+    ((lambda (a ab)
+       (set-frame-parameter (selected-frame) 'alpha (list a ab))
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
+       ) (car h) (car (cdr h)))
+    (setq alpha-list (cdr (append alpha-list (list h))))
+    )
+  )
+
+
+
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.htm\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.makohtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jinjahtml\\'" . web-mode))
+(setq web-mode-engines-alist '(("jinja" . "\\.jinjahtml\\'")
+                               ("mako" . "\\.html\\'")
+                               ("mako" . "\\.htm\\'")))
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-css-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+
+(semantic-mode 1)
+(global-set-key (kbd "C-c c .") 'semantic-ia-fast-jump)
+(setq ibuffer-vc-skip-if-remote nil)
+(require-package 'magit-tramp)
+(provide 'init-local)
