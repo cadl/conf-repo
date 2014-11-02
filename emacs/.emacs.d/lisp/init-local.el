@@ -14,4 +14,5 @@
 
 (semantic-mode 1)
 (global-set-key (kbd "C-c c .") 'semantic-ia-fast-jump)
+(blink-cursor-mode -1)
 (provide 'init-local)
